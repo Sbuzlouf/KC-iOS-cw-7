@@ -14,29 +14,32 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
+            
             Text("How ya feeling ?")
                 .font(.system(size: 35))
+                .padding()
             
             Text("\(feeling)")
                 .padding()
-                .font(.system(size: 35))
-            
+                .font(.system(size: 180))
+                .frame(width: 300, height: 300)
             
             
             ScrollView(.horizontal){
                 HStack {
-                    mood(emoji: "😂")
-                    mood(emoji: "😆")
-                    mood(emoji: "🫠")
-                    mood(emoji: "🙂")
-                    mood(emoji: "🥰")
-                    mood(emoji: "😎")
-                    mood(emoji: "😒")
-                    mood(emoji: "😖")
-                    mood(emoji: "😤")
-                    mood(emoji: "🤧")
-                }
+                    mood(emoji: "😂", myFeeling: $feeling)
+                    mood(emoji: "😆", myFeeling: $feeling)
+                    mood(emoji: "🫠", myFeeling: $feeling)
+                    mood(emoji: "🙂", myFeeling: $feeling)
+                    mood(emoji: "🥰", myFeeling: $feeling)
+                    mood(emoji: "😎", myFeeling: $feeling)
+                    mood(emoji: "😒", myFeeling: $feeling)
+                    mood(emoji: "😖", myFeeling: $feeling)
+                    mood(emoji: "😤", myFeeling: $feeling)
+                    mood(emoji: "🤧", myFeeling: $feeling)
+                }.padding()
             }
+            
         }
     }
 }
@@ -50,6 +53,7 @@ struct ContentView_Previews: PreviewProvider {
 struct mood: View {
     
     @State var emoji: String
+    @Binding var myFeeling: String
     
     var body: some View {
         Text("\(emoji)")
@@ -57,5 +61,8 @@ struct mood: View {
             .padding()
             .background(.yellow.opacity(0.3))
             .cornerRadius(80)
+            .onTapGesture {
+                myFeeling = emoji
+            }
     }
 }
